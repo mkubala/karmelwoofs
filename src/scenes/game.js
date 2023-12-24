@@ -6,7 +6,7 @@ class GameScene extends Phaser.Scene {
             key: 'game',
             pack: {
                 files: [
-                    { type: 'image', key: 'sky', url: './assets/sky.png' },
+                    { type: 'image', key: 'game-set', url: './assets/game-set.png' },
                     { type: 'image', key: 'ground', url: './assets/platform.png' },
                     { type: 'image', key: 'star', url: './assets/star.png' },
                     { type: 'image', key: 'bomb', url: './assets/bomb.png' }
@@ -21,18 +21,27 @@ class GameScene extends Phaser.Scene {
     preload() {
         this.load.spritesheet('dog', 
             'assets/dog/dog.png',
-            { frameWidth: 100, frameHeight: 60 }
+            { frameWidth: 92, frameHeight: 60 }
         );
     }
 
     create() {
-        this.add.image(400, 300, 'sky');
+        this.add.image(400, 400, 'game-set');
         
         const platforms = this.physics.add.staticGroup();
-        platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-        platforms.create(600, 400, 'ground');
-        platforms.create(50, 250, 'ground');
-        platforms.create(750, 220, 'ground');
+        
+        // Ground
+        platforms.add(this.#createPlatform(0, 666, 800, 800));
+        // Level 1
+        platforms.add(this.#createPlatform(440, 505, 730, 542));
+        // Level 2
+        platforms.add(this.#createPlatform(49, 360, 355, 408));
+        // Level 3
+        platforms.add(this.#createPlatform(450, 243, 751, 279));
+        // Level 4 - Left
+        platforms.add(this.#createPlatform(70, 106, 282, 153));
+        // Level 4 - Right
+        platforms.add(this.#createPlatform(574, 100, 700, 136));
 
         this.player = this.physics.add.sprite(100, 450, 'dog');
         this.player.setBounce(0);
@@ -77,7 +86,7 @@ class GameScene extends Phaser.Scene {
             repeat: -1
         });
 
-        this.player.body.setGravityY(500);
+        this.player.body.setGravityY(400);
         this.physics.add.collider(this.player, platforms);
 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -121,6 +130,14 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.player, bombs, this.#hitBomb, null, this);
     }
 
+    #createPlatform(x1, y1, x2, y2) {
+        const width = x2 - x1;
+        const height = y2 - y1;
+        const xAnchorPoint = (x1 + x2) / 2;
+        const yAnchorPoint = (y1 + y2) / 2;
+        return this.add.rectangle(xAnchorPoint, yAnchorPoint, width, height);
+    }
+
     update() {
         if (this.cursors.left.isDown)
         {
@@ -153,7 +170,6 @@ class GameScene extends Phaser.Scene {
         if (!this.player.body.touching.down) {
             this.jumps = true;
         }
-        console.log(`Jumps? ${this.jumps}`);
     }
 
     #hitBomb() {
