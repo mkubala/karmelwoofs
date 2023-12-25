@@ -6,7 +6,7 @@ class TitleScene extends Phaser.Scene {
             key: 'title',
             pack: {
                 files: [
-                    { type: 'image', key: 'title', url: './assets/title-800x800.png' }
+                    { type: 'image', key: 'title', url: './assets/title-800x800.jpg' }
                 ]
             }
         });

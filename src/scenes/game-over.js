@@ -7,7 +7,7 @@ class GameOverScene extends Phaser.Scene {
             key: 'game-over',
             pack: {
                 files: [
-                    { type: 'image', key: 'title-game-over', url: './assets/game-over-800x800.png' }
+                    { type: 'image', key: 'title-game-over', url: './assets/game-over-800x800.jpg' }
                 ]
             }
         });

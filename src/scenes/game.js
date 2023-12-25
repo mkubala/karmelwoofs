@@ -10,7 +10,7 @@ class GameScene extends Phaser.Scene {
             key: 'game',
             pack: {
                 files: [
-                    { type: 'image', key: 'game-set', url: './assets/game-set-800x800.png' },
+                    { type: 'image', key: 'game-set', url: './assets/game-set-800x800.jpg' },
                     { type: 'image', key: 'bomb', url: './assets/bomb.png' },
                     { type: 'image', key: 'heart', url: './assets/heart.png' }
                 ]
