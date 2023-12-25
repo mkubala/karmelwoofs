@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import GameOverScene from './scenes/game-over';
 import TitleScene from './scenes/title';
 import GameScene from './scenes/game';
+import LoaderScreen from './scenes/loader';
 
 const config = { 
     type: Phaser.AUTO,
@@ -21,6 +22,7 @@ const config = {
         }, 
     }, 
     scene: [
+        LoaderScreen,
         TitleScene,
         GameScene,
         GameOverScene
