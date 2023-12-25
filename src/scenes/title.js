@@ -19,6 +19,14 @@ class TitleScene extends Phaser.Scene {
             this.scene.start('game');
             this.scene.stop();
         });
+
+        const text = this.add.text(250, 700, 'Press ENTER to start', { fontSize: '28px', fill: '#FFFFFF' });
+        this.time.addEvent({
+            delay: 600,
+            callback: () => text.visible = !text.visible,
+            callbackScope: this,
+            loop: true
+        });
     }
 }
 
