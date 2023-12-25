@@ -24,12 +24,15 @@ class LoaderScreen extends Phaser.Scene {
     }
 
     create() {
+        this.add.text(400, 220, `LOADING...`, { fontSize: '32px', fill: '#FFFFFF' });
+
         this.progressBar = this.add.graphics();
         this.progressBox = this.add.graphics();
         this.progressBox.fillStyle(0x222222, 0.8);
-        this.progressBox.fillRect(240, 270, 320, 50);
+        this.progressBox.fillRect(200, 270, 600, 50);
 
         this.load.on('progress', function (value) {
+            console.log('progressing...');
             this.progressBar.clear();
             this.progressBar.fillStyle(0xffffff, 1);
             this.progressBar.fillRect(250, 280, 300 * value, 30);
@@ -40,11 +43,7 @@ class LoaderScreen extends Phaser.Scene {
         });
     
         this.load.on('complete', function () {
-            this.progressBar.destroy();
-            this.progressBox.destroy();
-    
-            this.scene.start('title');
-            this.scene.stop();
+            console.log('LOADED');
         }, this);
     
         this.load.start();
